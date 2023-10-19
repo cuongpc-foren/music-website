@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Music Player</title>
+  </head>
+  <body>
+    <style>
+        i{
+            color: white;
+        }
+        #btn-icon{
+            color: white;
+        }
+        #btn-icon:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    </style>
+    <table style="width: 100%">
+      <tr>
+        <td style="width: 30%">
+          <div></div>
+        </td>
+        <td style="width: 40%">
+          <div id="wrapper" style="background-image: url(./1.png);padding: 30px;border-radius: 20px;box-shadow: 4px 4px 4px 4px;color: gray;">
+            <table style="width: 80%; margin-top: 20%;margin-left: 50px;">
+              <tr>
+                <td style="width: 20%; text-align: center;" >
+                    <i class="fa-solid fa-shuffle" style="margin-bottom: 20px;"></i> <br />
+                    <i class="fa-solid fa-heart"></i>
+                </td>
+                <td style="width: 60%; text-align: center;color: white;">
+                  <h2>Five Egg & One Rocket</h2>
+                </td>
+                <td style="width: 20%;text-align: center;">
+                  <i class="fa-solid fa-repeat" style="margin-bottom: 20px;"></i> <br />
+                  <i class="fa-solid fa-share"></i>
+                </td>
+              </tr>
+            </table>
+            <table style="width: 80%; margin-top: 20%;margin-left: 50px;">
+                <tr>
+                    <td style="width: 20%; text-align: center;"><button id="btn-icon" style="background-color: transparent;border: none;"onclick="previous()"><i class="fa-solid fa-backward"style="font-size: 30px;"></i></button></td>
+                    <td style="width: 60%;text-align: center;"> <button id="btn-icon" style="background-color: transparent;border: none;" onclick="play()"><i class="fa-solid fa-play"style="font-size: 60px;"></i></i></button></td>
+                    <td style="width: 20%;text-align: center;"><button id="btn-icon" style="background-color: transparent;border: none;" onclick="next()"><i class="fa-solid fa-forward"style="font-size: 30px;"></i></button></td>
+                </tr>
+                <tr>
+                    <td style="width: 20%; text-align: center;"></td>
+                    <td style="width: 60%; text-align: center; "><button id="btn-icon" style="margin-top: 20%;background-color: transparent;border: none; font-size: 30px;" onclick="mute()"><i class="fa-solid fa-volume-xmark"></i></button></td>
+                    <td style="width: 20%; text-align: center;">
+                    <audio id="audio">
+                        <source src="./Musics/1.mp3">
+                    </audio>
+                </td>
+                </tr>
+            </table>
+          </div>
+        </td>
+        <td style="width: 30%">
+          <div></div>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      console.log("Debug");
+        var isPlay = 0;
+        var isMute = 0;
+        var indexAudio = 1;
+        function play(){
+            var audioElement = document.getElementById("audio");
+            if (isPlay == 0){
+                audioElement.play();
+                isPlay = 1;
+            }
+            else{
+                audioElement.pause();
+                isPlay = 0;
+            }
+        }
+
+        function mute(){
+            var audioElement = document.getElementById("audio");
+            if (isMute == 0){
+                audioElement.volume = 0;
+                isMute = 1;
+            }
+            else{
+                audioElement.volume = 1 ;
+                isMute = 0;
+            }
+        }
+        function next(){
+            var audioElement = document.getElementById("audio");
+            var background = document.getElementById("wrapper");
+            if(indexAudio < 3){
+                indexAudio++;
+                audioElement.src = "Musics/"+ indexAudio+'.mp3'
+                background.style.backgroundImage = "url("+indexAudio+".png)";
+                if(isPlay == 1){
+                   
+                    audioElement.play();
+                }
+            }
+            else{
+                indexAudio = 1;
+                audioElement.src = "Musics/"+ indexAudio + '.mp3'
+                background.style.backgroundImage = "url("+indexAudio+".png)";
+                if(isplay == 1){
+                    audioElement.play();
+                }
+            }
+        }
+        function previous(){
+            var audioElement = document.getElementById("audio");
+            var background = document.getElementById("wrapper");
+            if(indexAudio > 1){
+                indexAudio --;
+                console.log();
+                audioElement.src = "Musics/"+ indexAudio+'.mp3'
+                background.style.backgroundImage = "url("+indexAudio+".png)";
+                if(isPlay == 1){
+                    audioElement.play();
+                }
+            }
+            else{
+                indexAudio = 3;
+                audioElement.src = "Musics/"+ indexAudio+'.mp3'
+                background.style.backgroundImage = "url("+indexAudio+".png)";
+                if(isPlay == 1){
+                    audioElement.play();
+                }
+            }
+            
+            
+        }
+    </script>
+  </body>
+</html>

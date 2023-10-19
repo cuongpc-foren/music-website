@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="icon" href="image/icons8-spotify-24.png" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <!-- thư viện cho css và icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <!-- code begin area -->
+  <body
+    style="
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+    "
+  >
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .main-content {
+        width: 100%;
+        height: 100vh;
+        background-color: #1f1f1f;
+        padding-top: 100px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom: 5px solid #000000;
+      }
+      .navigation {
+        background-color: rgba(0, 0, 0, 0.7);
+        height: 65px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+      }
+
+      .sidebar {
+        background-color: #000000;
+        height: 100vh;
+        width: 100%;
+      }
+
+      .footer-content {
+        width: 100%;
+        height: 150px;
+        background-color: #242424;
+        padding-top: 1%;
+      }
+
+      #logo {
+        width: 90px;
+        height: 30px;
+      }
+
+      #Home-button span:hover {
+        font-weight: bold;
+        color: #fff;
+      }
+
+      #Home-button i.fa-solid:hover {
+        color: #fff;
+      }
+
+      #Search-button span:hover {
+        font-weight: bold;
+        color: #fff;
+      }
+      #Search-button i:hover {
+        color: #fff;
+      }
+
+      #Library-button span:hover {
+        font-weight: bold;
+        color: #fff;
+      }
+
+      /* Tùy chỉnh giao diện thanh cuộn dọc */
+      #scroll::-webkit-scrollbar {
+        width: 10px; /* Độ rộng của thanh cuộn */
+      }
+
+      #scroll::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.7); /* Màu của thanh cuộn */
+        border-radius: 5px; /* Bo tròn góc của thanh cuộn */
+      }
+
+      #scroll::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.7); /* Màu của thanh cuộn khi hover */
+      }
+
+      .text-box {
+        margin-left: 15px;
+        margin-top: 15px;
+      }
+
+      #button-box {
+        margin: 20px 0 0 10px;
+        background-color: #fff;
+        border-radius: 20px;
+        border: none;
+        width: 40%;
+        height: 20%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+        padding-bottom: 2px;
+      }
+
+      #button-box:hover {
+        width: 42%;
+        height: 22%;
+      }
+
+      .nav-function {
+        width: 100%;
+        height: 100%;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #242424;
+        background-color: #242424;
+        border-radius: 20px;
+      }
+
+      .nav-function:hover {
+        background-color: #fff;
+        color: #000000;
+      }
+
+      .nav-function a:hover {
+        color: #000000;
+      }
+
+      .nav-function a {
+        text-decoration: none;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        color: #b3b3b3;
+        font-weight: bold;
+        padding: 1px;
+      }
+    </style>
+
+    <table
+      style="
+        margin-top: 10px;
+        width: 100%;
+        height: 100vh;
+        background-color: #000000;
+      "
+    >
+      <!-- dòng đầu tiên -->
+      <tr style="width: 100%; height: 100vh">
+        <!-- cột đầu chứa sidebar -->
+        <td style="width: 24%; height: 100vh; position: fixed">
+          <aside class="sidebar">
+            <table style="width: 330px; height: 100vh">
+              <tr>
+                <div
+                  style="
+                    border: 1px solid #555;
+                    background-color: #121212;
+                    width: 95%;
+                    height: 160px;
+                    border-radius: 10px;
+                    margin-left: 2%;
+                    display: flex;
+                    flex-direction: column;
+                  "
+                >
+                  <a href="https://open.spotify.com/" target="_blank" title="go to real Spotify web">
+                    <img
+                      style="padding: 5% 0 0 5%"
+                      id="logo"
+                      src="image/logo (2).png"
+                      alt=""
+                    />
+                  </a>
+
+                  <a
+                    id="Home-button"
+                    style="
+                      padding: 5%;
+                      font-weight: bold;
+                      color: #b3b3b3;
+                      text-decoration: none;
+                      font-size: 16px;
+                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                        sans-serif;
+                    "
+                    href="index.html"
+                  >
+                    <i
+                      class="fa-solid fa-house"
+                      style="padding-right: 5%; color: #b3b3b3"
+                    ></i>
+                    <span>Home</span>
+                  </a>
+
+                  <a
+                    id="Search-button"
+                    style="
+                      padding: 5%;
+                      font-weight: bold;
+                      color: #b3b3b3;
+                      text-decoration: none;
+                      font-size: 16px;
+                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                        sans-serif;
+                    "
+                    href=""
+                  >
+                    <i
+                      class="fa-solid fa-magnifying-glass"
+                      style="padding-right: 5%; color: #b3b3b3"
+                    ></i>
+                    <span>Search</span>
+                  </a>
+                </div>
+              </tr>
+
+              <!-- khoang cach dau -->
+              <tr>
+                <div
+                  style="width: 10px; height: 10px; background-color: #000000"
+                ></div>
+              </tr>
+
+              <tr>
+                <div
+                  style="
+                    border: 1px solid #555;
+                    background-color: #121212;
+                    width: 95%;
+                    height: 490px;
+                    border-radius: 10px;
+                    margin-left: 2%;
+                    padding-top: 5%;
+                  "
+                >
+                  <a
+                    id="Library-button"
+                    style="
+                      padding: 5%;
+                      font-weight: bold;
+                      color: #b3b3b3;
+                      text-decoration: none;
+                      font-size: 16px;
+                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                        sans-serif;
+                    "
+                    href=""
+                  >
+                    <i
+                      class="fa-solid fa-book"
+                      style="padding-right: 5%; color: #b3b3b3"
+                    ></i>
+                    <span>Your Library</span>
+                  </a>
+                  <div
+                    id="scroll"
+                    style="
+                      width: 98%;
+                      height: 190px;
+                      border-radius: 10px;
+                      border: 1px solid #555;
+                      background-color: #121212;
+                      margin: 5% 1% 0 1%;
+                      overflow-y: scroll;
+                    "
+                  >
+                    <div
+                      id="Create"
+                      style="
+                        width: 98%;
+                        height: 160px;
+                        border-radius: 10px;
+                        border: 1px solid #555;
+                        background-color: #242424;
+                        margin: 5% 0% 0 1%;
+                      "
+                    >
+                      <p
+                        class="text-box"
+                        style="
+                          color: #fff;
+                          font-size: 16px;
+                          font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                            sans-serif;
+                          font-weight: bold;
+                        "
+                      >
+                        Create your first playlist
+                      </p>
+                      <p
+                        class="text-box"
+                        style="
+                          color: #fff;
+                          font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                            sans-serif;
+                          font-size: 14px;
+                        "
+                      >
+                        It's easy, we'll help you
+                      </p>
+
+                      <button id="button-box">Create playlist</button>
+                    </div>
+                    <div
+                      id="browse"
+                      style="
+                       width: 98%;
+                        height: 160px;
+                        border-radius: 10px;
+                        border: 1px solid #555;
+                        background-color: #242424;
+                        margin: 5% 0% 5% 1%;
+                      "
+                    >
+                      <p
+                        class="text-box"
+                        style="
+                          color: #fff;
+                          font-size: 16px;
+                          font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                            sans-serif;
+                          font-weight: bold;
+                        "
+                      >
+                        Let's find some podcasts to follow
+                      </p>
+                      <p
+                        class="text-box"
+                        style="
+                          color: #fff;
+                          font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                            sans-serif;
+                          font-size: 14px;
+                        "
+                      >
+                        We'll keep you updated on new episodes
+                      </p>
+
+                      <button id="button-box">Browse podcasts</button>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+            </table>
+          </aside>
+        </td>
+
+        <!-- cột 2 chứa nav, main và footer -->
+        <td style="width: 76%; height: 100vh">
+          <nav class="navigation" style="color: white; display: flex">
+            <table style="width: 100%">
+              <td style="width: 9.5%">
+                <div class="nav-function">
+                  <a href="../music_html/Music_Player.html">Music player</a>
+                </div>
+              </td>
+              <td style="width: 1%;"></td>
+              <td style="width: 9.5%">
+                <div class="nav-function">
+                  <a href="../video_html/Video_Player.html">Video player</a>
+                </div>
+              </td>
+              <td style="width: 80%"></td>
+            </table>
+          </nav>
+
+          <main
+            class="main-content"
+            style="background-image: url(image/home_background.png);"
+          >
+            <table>
+              <tr></tr>
+              <tr></tr>
+            </table>
+          </main>
+          <footer class="footer-content">
+            <table>
+              <tr>
+                <div
+                  style="
+                    border-top: 1px solid grey;
+                    width: 95%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-left: 2%;
+                  "
+                ></div>
+              </tr>
+              <tr>
+                <h4
+                  style="
+                    color: #fff;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    margin-top: 4%;
+                    margin-left: 2%;
+                  "
+                >
+                  © 2023 Spotify AB
+                </h4>
+              </tr>
+            </table>
+          </footer>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
